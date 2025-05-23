@@ -41,14 +41,6 @@ const QUESTIONS = [
     message: "4. Productivity Score (1-5):",
     validate: (input) => ['1', '2', '3', '4', '5'].includes(input) ? true : 'Enter a number 1-5',
   },
-  {
-    name: 'branchAssociation',
-    message: "5. Branch Association (optional):",
-  },
-  {
-    name: 'bugsInsight',
-    message: "6. Bugs Insight (optional):",
-  },
 ];
 
 async function multiPointPrompt(question) {
@@ -126,19 +118,15 @@ async function main() {
   // Ensure a blank line after index
   logContent = logContent.replace(/(## Index[\s\S]*?)(?=\n## |$)/, (m) => m.endsWith('\n\n') ? m : m + '\n');
 
-  // point counter
-  let pointCounter = 1;
   // Append or update log for the specified date
   const dateSectionPattern = new RegExp(`## ${today}([\\s\\S]*?)(?=## |$)`);
-  const newLogContent = `## ${today}\n${pointCounter++}. What I did:\n` +
+  const newLogContent = `## ${today}\n1. What I did:\n` +
     answers.whatIDid.map(p => SPACE_4_CHAR +`- ${p}`).join('\n') + '\n' +
-    `${pointCounter++}. What's next:\n` +
+    `2. What's next:\n` +
     answers.whatsNext.map(p => SPACE_4_CHAR + `- ${p}`).join('\n') + '\n' +
-    `${pointCounter++}. What Block:\n` +
+    `3. What Block:\n` +
     answers.whatBlock.map(p => SPACE_4_CHAR + `- ${p}`).join('\n') + '\n' +
-    `${pointCounter++}. Productivity Score (1-5): ${answers.productivityScore}\n` +
-    (answers.branchAssociation ? `${pointCounter++}. Branch Association:\n${SPACE_4_CHAR}- ${answers.branchAssociation}\n` : '') +
-    (answers.bugsInsight ? `${pointCounter++}. Bugs Insight:\n${SPACE_4_CHAR}- ${answers.bugsInsight}\n` : '');
+    `4. Productivity Score (1-5): ${answers.productivityScore}\n`;
 
   if (dateSectionPattern.test(logContent)) {
     logContent = logContent.replace(dateSectionPattern, newLogContent);
