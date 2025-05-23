@@ -1,0 +1,17 @@
+{
+  "name": "daily-log-cli",
+  "version": "1.0.0",
+  "description": "CLI tool to add daily logs to daily-log.md",
+  "main": "log-daily.js",
+  "type": "module",
+  "scripts": {
+    "start": "node log-daily.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^21.1.1",
+    "dotenv": "^16.5.0",
+    "inquirer": "^9.0.0",
+    "path": "^0.12.7",
+    "yargs": "^17.7.2"
+  }
+}
